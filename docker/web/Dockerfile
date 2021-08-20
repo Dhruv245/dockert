@@ -11,6 +11,8 @@ apt-get -y update && \
   docker-php-ext-install zip && \
   rm -rf /var/lib/apt/lists/*  
 
+RUN apt-get install -y libfreetype6-dev
+
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
    docker-php-ext-install -j$(nproc) gd 
   # apk add jpeg-dev libpng-dev && \
