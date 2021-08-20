@@ -1,4 +1,4 @@
-FROM php:7.4.22-apache2-stretch
+FROM php:7.4.22-apache-stretch
 
 RUN apt-get update -yqq && \
 apt-get -y update && \
