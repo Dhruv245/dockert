@@ -1,11 +1,11 @@
-FROM php:7.4.22-fpm
+FROM php:7.4.22-apache2-stretch
 
 RUN apt-get update -yqq && \
 apt-get -y update && \
   apt-get install -y zip unzip libjpeg62-turbo-dev libpng-dev && \
   apt-get install -y nano && \
   apt-get install -y libzip-dev && \
-  # a2enmod rewrite && \
+  a2enmod rewrite && \
   docker-php-ext-install mysqli pdo pdo_mysql exif && \
   docker-php-ext-configure zip && \
   docker-php-ext-install zip && \
@@ -32,7 +32,7 @@ RUN docker-php-ext-configure gd  --with-jpeg && \
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
-# COPY default.conf /etc/apache2/sites-enabled/000-default.conf
+COPY default.conf /etc/apache2/sites-enabled/000-default.conf
 
 # RUN apt-get -y install sudo
 # RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
@@ -47,8 +47,8 @@ WORKDIR /var/www/app
 # RUN echo pwd: `pwd` && echo ls: `ls`
 # RUN composer install
 
-# CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
-# EXPOSE 80
-EXPOSE 9000
-CMD ["php-fpm"]
+EXPOSE 80
+# EXPOSE 9000
+# CMD ["php-fpm"]
