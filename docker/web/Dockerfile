@@ -7,7 +7,7 @@ apt-get -y update && \
   apt-get install -y libzip-dev && \
   # a2enmod rewrite && \
   docker-php-ext-install mysqli pdo pdo_mysql exif && \
-  docker-php-ext-configure zip --with-libzip && \
+  docker-php-ext-configure zip && \
   docker-php-ext-install zip && \
   rm -rf /var/lib/apt/lists/*  
 
