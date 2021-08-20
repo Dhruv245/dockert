@@ -2,36 +2,46 @@ version: '3'
 
 services:
 
-  php:
-    container_name: php_server
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 8000M
+  # php:
+  #   container_name: php_server
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2'
+  #         memory: 8000M
+  #   build:
+  #     context: ./docker/web
+  #   volumes:
+  #     - ./:/var/www/app
+  #   depends_on:
+  #     - db
+
+  # web:
+  #   image: nginx:1.19-alpine
+  #   container_name: server_web
+  #   ports:
+  #     - 500:80
+  #   volumes:
+  #     - ./:/var/www/app
+  #     - ./docker/web/nginx/:/etc/nginx/conf.d/
+  web:
+    container_name: server_web
     build:
       context: ./docker/web
+    ports:
+      - 80:80
     volumes:
       - ./:/var/www/app
     depends_on:
       - db
-
-  web:
-    image: nginx:1.19-alpine
-    container_name: server_web
-    ports:
-      - 500:80
-    volumes:
-      - ./:/var/www/app
-      - ./docker/web/nginx/:/etc/nginx/conf.d/
-
+      
   varnish:
     build: ./docker/web/varnish
     container_name: web_varnish
     links:
         - web
     ports:
-      - 80:80
+      - 90:80
     depends_on:
       - web
 
