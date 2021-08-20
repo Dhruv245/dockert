@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:7.2.10-fpm
 
 RUN apt-get update -yqq && \
 apt-get -y update && \
