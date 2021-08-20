@@ -11,7 +11,7 @@ apt-get -y update && \
   docker-php-ext-install zip && \
   rm -rf /var/lib/apt/lists/*  
 
-RUN docker-php-ext-configure gd  --with-jpeg && \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-freetype && \
    docker-php-ext-install -j$(nproc) gd 
   # apk add jpeg-dev libpng-dev && \
   # docker-php-ext-configure gd --with-jpeg && \
