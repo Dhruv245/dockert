@@ -1,0 +1,10 @@
+FROM newsdev/varnish:4.1.0
+COPY default.vcl /etc/varnish/
+
+# ENV VARNISH_CONFIG  /etc/varnish/default.vcl
+# ENV VARNISH_STORAGE malloc,2048m
+# ENV VARNISH_LISTEN  :8081
+# ENV VARNISH_MANAGEMENT_LISTEN 127.0.0.1:6082
+# EXPOSE 6081
+# EXPOSE 80 8081
+# CMD []
