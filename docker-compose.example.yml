@@ -45,7 +45,6 @@ services:
       - ./mysqldata:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=yourdb
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
