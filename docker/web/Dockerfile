@@ -49,6 +49,8 @@ WORKDIR /var/www/app
 # COPY ./composer.json /var/www/app
 # RUN echo pwd: `pwd` && echo ls: `ls`
 # RUN composer install
+ENV TZ=Asia/Kolkata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
