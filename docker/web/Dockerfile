@@ -55,6 +55,9 @@ RUN apt-get -y update \
 && docker-php-ext-configure intl \
 && docker-php-ext-install intl
 
+
+COPY ssl.key /etc/apache2/ssl.key;
+COPY ssl.crt /etc/apache2/ssl.crt;
 RUN a2enmod ssl && \
 service apache2 restart
 
