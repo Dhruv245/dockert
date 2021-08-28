@@ -58,8 +58,7 @@ RUN apt-get -y update \
 
 COPY ssl.key /etc/apache2/ssl.key
 COPY ssl.crt /etc/apache2/ssl.crt
-RUN a2enmod ssl && \
-service apache2 restart
+RUN a2enmod ssl
 
 ENV TZ=Asia/Kolkata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
