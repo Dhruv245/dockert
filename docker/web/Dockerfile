@@ -55,7 +55,8 @@ RUN apt-get -y update \
 && docker-php-ext-configure intl \
 && docker-php-ext-install intl
 
-RUN a2enmod ssl
+RUN a2enmod ssl && \
+service apache2 restart
 
 ENV TZ=Asia/Kolkata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
