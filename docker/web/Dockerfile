@@ -72,7 +72,7 @@ ENV PHP_MEMORY_LIMIT=128M
 RUN a2enmod proxy && \
  a2enmod proxy_http && \
  a2enmod proxy_balancer && \
- a2enmod lbmethod_byrequests && \
+ a2enmod lbmethod_byrequests
 #########
 
 COPY default.conf /etc/apache2/sites-enabled/000-default.conf
