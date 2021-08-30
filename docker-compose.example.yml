@@ -33,7 +33,7 @@ services:
       - 443:443
     volumes:
       - ./:/var/www/app
-      - ./docker/web/upload.ini:/usr/local/etc/php/conf.d/uploads.ini 
+      - ./docker/web/upload.ini:/usr/local/etc/php/conf.d/php-ini-overrides.ini 
     depends_on:
       - db
       
