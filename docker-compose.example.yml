@@ -30,6 +30,7 @@ services:
       context: ./docker/web
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./:/var/www/app
       - ./docker/web/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini 

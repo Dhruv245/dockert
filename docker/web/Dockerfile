@@ -50,8 +50,21 @@ WORKDIR /var/www/app
 # RUN echo pwd: `pwd` && echo ls: `ls`
 # RUN composer install
 RUN docker-php-ext-install bcmath
+RUN apt-get -y update \
+&& apt-get install -y libicu-dev \
+&& docker-php-ext-configure intl \
+&& docker-php-ext-install intl
+
+
+COPY ssl.key /etc/apache2/ssl.key
+COPY ssl.crt /etc/apache2/ssl.crt
+RUN a2enmod ssl
+
 ENV TZ=Asia/Kolkata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN docker-php-ext-install gmp
+
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
