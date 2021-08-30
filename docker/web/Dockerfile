@@ -35,12 +35,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
 
-COPY default.conf /etc/apache2/sites-enabled/000-default.conf
 
-# RUN apt-get -y install sudo
-# RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
-
-WORKDIR /var/www/app
 
 # RUN php ./artisan key:generate
 # COPY ./composer.* /var/www/app
@@ -72,6 +67,18 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt-get update && apt-get install -y nodejs yarn
 
 ENV PHP_MEMORY_LIMIT=128M
+
+
+RUN a2enmod proxy && \
+ a2enmod proxy_http && \
+ a2enmod proxy_balancer && \
+ a2enmod lbmethod_byrequests && \
+#########
+
+COPY default.conf /etc/apache2/sites-enabled/000-default.conf
+
+WORKDIR /var/www/app
+
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 
 EXPOSE 80
