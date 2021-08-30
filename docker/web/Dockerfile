@@ -63,7 +63,7 @@ RUN a2enmod ssl
 ENV TZ=Asia/Kolkata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt install libgmp-dev && docker-php-ext-install gmp
+RUN apt install libgmp-dev -y && docker-php-ext-install gmp
 
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
