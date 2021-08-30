@@ -32,6 +32,7 @@ services:
       - 80:80
     volumes:
       - ./:/var/www/app
+      - ./docker/web/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini 
     depends_on:
       - db
       
